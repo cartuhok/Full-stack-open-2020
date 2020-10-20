@@ -49,5 +49,3 @@ const App = () => {
 
 
 ReactDOM.render(<App />, document.getElementById('root'))
-
-//How do I access vars within the App obj at this point in the course? 
