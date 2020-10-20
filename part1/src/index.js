@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 
 const Header = (props) => (
   <>
-    {props.course}
+    <h1>{props.course}</h1>
   </>
 )
 
