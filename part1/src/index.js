@@ -7,9 +7,17 @@ const Header = (props) => (
   </>
 )
 
+const Part = (props) => (
+  <>
+    <p>{props.part1} {props.part2} {props.part3} has {props.exercises1} {props.exercises2} {props.exercises3} exercises</p>
+  </>
+)
+
 const Content = (props) => (
   <>
-    <p>{props.part} has {props.exercises} exercises</p>
+    <Part part1={props.part1} exercises1={props.exercises1}/>
+    <Part part2={props.part2} exercises2={props.exercises2}/>
+    <Part part3={props.part3} exercises3={props.exercises3}/>
   </>
 )
 
@@ -18,7 +26,6 @@ const Total = (props) => (
     <p>Number of exercises {props.total}</p>
   </>
 )
-
 
 const App = () => {
   const course = 'Half Stack application development'
@@ -33,13 +40,14 @@ const App = () => {
     <div>
       <Header course={course} />
       
-      <Content part={part1} exercises={exercises1} />
-      <Content part={part2} exercises={exercises3} />
-      <Content part={part3} exercises={exercises3} />
+      <Content part1={part1} exercises1={exercises1} part2={part2} exercises2={exercises2} part3={part3} exercises3={exercises3} />
    
       <Total total={exercises1 + exercises2 + exercises3} />
     </div>
   )
 }
 
+
 ReactDOM.render(<App />, document.getElementById('root'))
+
+//How do I access vars within the App obj at this point in the course? 
