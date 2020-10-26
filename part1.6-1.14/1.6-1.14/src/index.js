@@ -1,20 +1,48 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
-
-
-const Button = (props) => (
+const Button = props => (
   <button onClick={props.handleClick} >
     {props.text}
   </button>
 )
 
-const Results = (props) => (
-  <>
-    {props.text}: {props.rating} <br />
-  </>
+const Statistic = props =>  (
+    <>
+    <table>
+      <tbody>
+        <tr>
+          <td>
+            {props.statText}
+          </td>
+          <td>
+            {props.statRating}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    </>
 )
 
+const Statistics = (props) => {
+  if (props.statRating.sum === 0) {
+    return (
+      <p>No feedback given.</p>
+    )
+  }
+  else {
+    return (
+      <>
+      <Statistic statText="good" statRating={props.statRating.good} />
+      <Statistic statText="neutral" statRating={props.statRating.neutral} />
+      <Statistic statText="bad" statRating={props.statRating.bad} />
+      <Statistic statText="all" statRating={props.statRating.sum} />
+      <Statistic statText="average" statRating={props.statRating.average} />
+      <Statistic statText="percent positive" statRating={props.statRating.goodPercentage} />
+      </>
+    )
+  }
+}
 
 const App = () => {
 
@@ -24,9 +52,9 @@ const App = () => {
 
   const sum = good + neutral + bad
   const average = (good-bad) / sum
-  const goodPercentage = (good / sum)*100
-    
-  
+  const goodPercentage = (good / sum)*100+"%"
+
+  const statRating = {good, neutral, bad, sum, average, goodPercentage}
 
   return (
     <div>
@@ -35,15 +63,9 @@ const App = () => {
       <Button text="neutral" handleClick={() => addNeutral(neutral + 1)} />
       <Button text="bad" handleClick={() => addBad(bad + 1)} />
       <h1>Statistics</h1>
-      <Results text="good" rating={good} />
-      <Results text="neutral" rating={neutral} />
-      <Results text="bad" rating={bad} />
-      <Results text="all" rating={sum} />
-      <Results text="average" rating={average} />
-      <Results text="positive" rating={goodPercentage + " %"} />
+      <Statistics statRating={statRating} />
     </div>
   )
 }
-
 
 ReactDOM.render(<App />, document.getElementById('root'))
