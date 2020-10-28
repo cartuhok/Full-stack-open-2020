@@ -42,8 +42,8 @@ const App = ({anecdotes}) => {
   return (
     <div>
       {anecdotes[selected]}
-      <Button text="next quote" handleEvent={() => handleNext()} />
-      <Button text="upvote" handleEvent={() => handleVote()} />
+      <Button text="next quote" handleEvent={handleNext} />
+      <Button text="upvote" handleEvent={handleVote} />
       <Votes votes={score[selected]} />
     </div>
   )
