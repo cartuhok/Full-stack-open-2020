@@ -27,7 +27,7 @@ const App = ({anecdotes}) => {
   const [selected, setSelected] = useState(0)
   const [points, setPoints] = useState(Array.apply(null, new Array(anecdotes.length)).map(Number.prototype.valueOf,0))
   const score = [...points]
-  const randomNumber =  Math.floor(Math.random()*anecdotes.length)
+  const randomNumber = () =>  Math.floor(Math.random()*anecdotes.length)
   
 
   const handleNext = () => {
