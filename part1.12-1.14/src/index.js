@@ -23,13 +23,13 @@ const Votes = ({votes}) => (
   </>
 )
 
+
 const App = ({anecdotes}) => {
   const [selected, setSelected] = useState(0)
   const [points, setPoints] = useState(Array.apply(null, new Array(anecdotes.length)).map(Number.prototype.valueOf,0))
   const score = [...points]
   const randomNumber = () =>  Math.floor(Math.random()*anecdotes.length)
   
-
   const handleNext = () => {
     setSelected(randomNumber)
   }
@@ -45,6 +45,8 @@ const App = ({anecdotes}) => {
       <Button text="next quote" handleEvent={handleNext} />
       <Button text="upvote" handleEvent={handleVote} />
       <Votes votes={score[selected]} />
+      <h2>Anecdote with most votes</h2>
+      {anecdotes[score.indexOf(Math.max(...score))]}
     </div>
   )
 }
