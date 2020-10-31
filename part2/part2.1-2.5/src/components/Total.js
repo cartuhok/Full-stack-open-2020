@@ -13,6 +13,6 @@ const Total = ({course}) => {
     )
 }
 
-console.log(Total)
+
 
 export default Total
