@@ -1,7 +1,7 @@
 import React from 'react'
 
-const Total = ({courses}) => {
-    const courseParts = courses.parts.map(part => part.exercises)
+const Total = ({course}) => {
+    const courseParts = course.parts.map(part => part.exercises)
     const sum = courseParts.reduce((sum, part) => {
         return (sum + part) 
     }, 0)

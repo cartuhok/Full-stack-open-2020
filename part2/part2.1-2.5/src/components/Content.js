@@ -2,11 +2,11 @@ import React from 'react'
 import Part from './Part'
 import Total from "./Total"
 
-const Content = ({courses}) => {
+const Content = ({course}) => {
   return (
   <>
-    {courses.parts.map(part => <Part key={part.id} name={part.name} exercises={part.exercises} />)}
-    <Total courses={courses} />
+    {course.parts.map(part => <Part key={part.id} name={part.name} exercises={part.exercises} />)}
+    <Total course={course} />
   </>
   )
 }
