@@ -1,4 +1,7 @@
 import React, { useState } from 'react'
+import Filter from './Filter'
+import People from './People'
+import PersonForm from './PersonForm'
 
 const App = () => {
   const [ persons, setPersons ] = useState([
@@ -14,11 +17,9 @@ const App = () => {
   const handleNameChange = (event) => {
     setNewName(event.target.value)
   }
-
   const handleNumberChange = (event) => {
     setNewNumber(event.target.value)
   }
-  
   const handleSearchChange = (event) => {
     setNewSearch(event.target.value)
   }
@@ -27,6 +28,7 @@ const App = () => {
     event.preventDefault()
 
     const matchCheck = persons.map(person => person.name === newName)
+
     const nameObj = {
       name: newName,
       number: newNumber
@@ -44,41 +46,24 @@ const App = () => {
       setNewName('')
       setNewNumber('')
     }
+    
     matchCheck.includes(true) ? alert() : handleNewNames()   
   }
 
   return (
     <div>
       <h2>Phonebook</h2>
-      <div>
-          search contacts: <input 
-                  value={newSearch}
-                  onChange={handleSearchChange}   
-                />
-      </div>
+      <Filter value={newSearch} onChange={handleSearchChange} />
+
       <h2>Add New Contact:</h2>
-      <form onSubmit={addName}>
-        <div>
-          name: <input 
-                  value={newName}
-                  onChange={handleNameChange}   
-                />
-        </div>
-        <div>
-          number: <input
-                    value={newNumber}
-                    onChange={handleNumberChange}
-                  />
-        </div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
+      <PersonForm 
+        onSubmit={addName}
+        name={{value: newName, onChange: handleNameChange}}
+        number={{value: newNumber, onChange: handleNumberChange}}
+      />
 
       <h2>Numbers</h2>
-      <div>
-      {persons.map(person => person.name.toLowerCase().includes(newSearch.toLowerCase()) ? <p key={person.name}>{person.name}: {person.number} </p> : null )}
-      </div>
+      <People persons={persons} newSearch={newSearch}/>
     </div>
   )
 }
