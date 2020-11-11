@@ -3,7 +3,6 @@ import axios from 'axios'
 import SearchForm from './SearchForm'
 import Countries from './Countries'
 
-
 const App = () => {
   const [country, setCountry] = useState([])
   const [ newSearch, setNewSearch ] = useState('')
@@ -15,9 +14,6 @@ const App = () => {
       setCountry(response.data)  
     )
   },[])
-
-
-
 
   const handleSearchChange = (event) => {
     setNewSearch(event.target.value)
