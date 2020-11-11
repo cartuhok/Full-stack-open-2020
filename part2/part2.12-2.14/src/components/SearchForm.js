@@ -2,8 +2,7 @@ import React from "react"
 
 const SearchForm = (props) => {
     return (
-        <input 
-            value={props.value}
+        <input
                 onChange={props.onChange}   
         />
     )

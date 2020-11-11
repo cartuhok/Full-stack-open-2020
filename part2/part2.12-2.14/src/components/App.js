@@ -24,7 +24,6 @@ const App = () => {
       <h1>Countries</h1>
       <SearchForm
         onChange={handleSearchChange}
-        name={country}
       />
       <Countries country={country} newSearch={newSearch}/>
     </div>
