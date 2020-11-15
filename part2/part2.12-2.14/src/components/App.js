@@ -17,12 +17,12 @@ const App = () => {
     )
   },[])
 
-  const countrySearch = countries.filter(country => country.name.toLowerCase().includes(newSearch.toLowerCase()))
-  const countryMatch = countrySearch.some(country => country.name.toLowerCase() === newSearch.toLowerCase())
+  const countryIncludes = countries.filter(country => country.name.toLowerCase().includes(newSearch.toLowerCase()))
+  const countryMatches = countryIncludes.some(country => country.name.toLowerCase() === newSearch.toLowerCase())
 
-  let filteredCountries = ''
-  if (countryMatch) {
-    filteredCountries = countrySearch.filter(country => country.name.toLowerCase() === newSearch.toLowerCase())
+  let matchedResult = ''
+  if (countryMatches) {
+    matchedResult = countryIncludes.filter(country => country.name.toLowerCase() === newSearch.toLowerCase())
   }
 
   const handleSearchChange = (event) => {
@@ -41,12 +41,12 @@ const App = () => {
         onChange={handleSearchChange}
         value={newSearch}
       />
-      {toggle && countryMatch && (
-        <Countries countries={filteredCountries} />
+      {toggle && countryMatches && (
+        <Countries countries={matchedResult} />
       )}
-      {toggle && !countryMatch && (
+      {toggle && !countryMatches && (
         <Countries
-          countries={countrySearch}
+          countries={countryIncludes}
           handleClickEvent={handleClickEvent}
         />
       )}
