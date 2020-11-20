@@ -1,9 +1,8 @@
 import React from 'react'
+import Weather from './Weather'
 
 const Country = ({country}) => {
-   
     
-
     return (
         <div>
             <h1>{country.name}</h1>
@@ -15,10 +14,10 @@ const Country = ({country}) => {
             </ul>
             <h2>Flag</h2>
             <img width="400" src={country.flag} alt="flag" />
+            <h2>Weather</h2>
+            <Weather capital={country.capital} />
         </div>
     )
 }
 
 export default Country
-
-/*         */
