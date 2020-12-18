@@ -51,7 +51,17 @@ const App = () => {
       setNewNumber('')
     }
     
-    matchCheck.includes(true) ? alert() : handleNewNames()   
+    matchCheck.includes(true) ? alert() : handleNewNames()  
+    
+    axios
+      .post('http://localhost:3001/persons', nameObj)
+      .then(response => {
+        setPersons(persons.concat(response.data))
+        setNewName('')
+        setNewNumber('')
+        console.log(response);
+      })
+
   }
 
   return (
