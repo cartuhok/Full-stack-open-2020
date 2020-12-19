@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
 import Filter from './Filter'
 import People from './People'
 import PersonForm from './PersonForm'
+import peopleService from '../services/people'
+
+console.log(peopleService);
 
 const App = () => {
   const [ persons, setPersons ] = useState([]) 
@@ -11,10 +13,10 @@ const App = () => {
   const [ newSearch, setNewSearch ] = useState('')
 
   useEffect(() => {
-    axios
-      .get('http://localhost:3001/persons')
-      .then(response => {
-        setPersons(response.data)
+
+    peopleService.getAll()
+      .then(initialPeople => {
+        setPersons(initialPeople)
       })
   }, [])
 
@@ -53,13 +55,12 @@ const App = () => {
     
     matchCheck.includes(true) ? alert() : handleNewNames()  
     
-    axios
-      .post('http://localhost:3001/persons', nameObj)
-      .then(response => {
-        setPersons(persons.concat(response.data))
+    peopleService.create(nameObj)
+      .then(returnedPerson => {
+        setPersons(persons.concat(returnedPerson))
         setNewName('')
         setNewNumber('')
-        console.log(response);
+        console.log(returnedPerson);
       })
 
   }
