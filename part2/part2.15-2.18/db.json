@@ -1,64 +1,24 @@
 {
   "persons": [
     {
-      "name": "Arto Hellas",
-      "number": "040-123456",
-      "id": 1
-    },
-    {
-      "name": "Ada Lovelace",
-      "number": "39-44-5323523",
-      "id": 2
-    },
-    {
-      "name": "Dan Abramov",
-      "number": "12-43-234345",
+      "name": "Bae",
+      "number": "51451-516",
       "id": 3
     },
     {
-      "name": "Mary Poppendieck",
-      "number": "39-23-6423122",
+      "name": "Carter",
+      "number": "978-578-0031",
       "id": 4
     },
     {
-      "name": "carter rink",
-      "number": "978-578-0031",
+      "name": "Bub",
+      "number": "1-800-Bones",
       "id": 5
     },
     {
-      "name": "Jan Marot",
-      "number": "978-314-4108",
+      "name": "mum",
+      "number": "978-454-1518",
       "id": 6
-    },
-    {
-      "name": "Bae",
-      "number": "207-330-0555",
-      "id": 7
-    },
-    {
-      "name": "Tyler Rink",
-      "number": "978-578-5567",
-      "id": 8
-    },
-    {
-      "name": "Bob Smith",
-      "number": "9781218",
-      "id": 9
-    },
-    {
-      "name": "Tysnsw",
-      "number": "9451-5481",
-      "id": 10
-    },
-    {
-      "name": "Bob Burget",
-      "number": "888-222-5454",
-      "id": 11
-    },
-    {
-      "name": "Rob Rink",
-      "number": "978-314-4067",
-      "id": 12
     }
   ]
 }

@@ -4,7 +4,6 @@ import People from './People'
 import PersonForm from './PersonForm'
 import peopleService from '../services/people'
 
-console.log(peopleService);
 
 const App = () => {
   const [ persons, setPersons ] = useState([]) 
@@ -12,12 +11,14 @@ const App = () => {
   const [ newNumber, setNewNumber ] = useState('')
   const [ newSearch, setNewSearch ] = useState('')
 
-  useEffect(() => {
 
-    peopleService.getAll()
-      .then(initialPeople => {
-        setPersons(initialPeople)
-      })
+const setPeople = () => peopleService.getAll()
+.then(initialPeople => {
+  setPersons(initialPeople)
+})
+
+  useEffect(() => {
+    setPeople()
   }, [])
 
   const handleNameChange = (event) => {
@@ -60,9 +61,18 @@ const App = () => {
         setPersons(persons.concat(returnedPerson))
         setNewName('')
         setNewNumber('')
-        console.log(returnedPerson);
       })
+  }
 
+  const handleDelete = (event) => {
+    const confirm = window.confirm(`Are you sure you want to delete ${event.target.name} ?`)
+    if (confirm) {
+    peopleService.remove(event.target).then(() => {
+      setPeople()
+    })
+    } else {
+      console.log('nope.');
+    }
   }
 
   return (
@@ -78,7 +88,7 @@ const App = () => {
       />
 
       <h2>Numbers</h2>
-      <People persons={persons} newSearch={newSearch}/>
+      <People persons={persons} newSearch={newSearch} handleDelete={handleDelete}/>
     </div>
   )
 }
