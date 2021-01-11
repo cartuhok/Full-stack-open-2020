@@ -12,12 +12,14 @@ const create = newPerson => {
 }
 
 const remove = id => {
-
     const personURL = `${baseUrl}/${id.value}`
     const request = axios.delete(personURL)
     return request.then(response => response.data)
 }
 
+const swap = newNumber => {
+    const request = axios.put(`${baseUrl}/${newNumber.id}`, newNumber)
+    return request.then(response => response.data)
+}
 
-
-export default { getAll, create, remove }
+export default { getAll, create, remove, swap }
