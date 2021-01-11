@@ -12,7 +12,9 @@ const App = () => {
   const [ newName, setNewName ] = useState('')
   const [ newNumber, setNewNumber ] = useState('')
   const [ newSearch, setNewSearch ] = useState('')
-  const [successMessage, setSuccessMessage] = useState(null)
+  const [notification, setNotification] = useState(null)
+  const [status, setStatus] = useState('')
+
 
   const setPeople = () => peopleService.getAll()
   .then(initialPeople => {
@@ -52,9 +54,10 @@ const App = () => {
           setPersons(persons.map(person => person.id !== newNumber.id ? person : newNumber))
           setNewName('')
           setNewNumber('')
-          setSuccessMessage(`Updated ${newNumber.name}`)
+          setStatus('success')
+          setNotification(`Updated ${newNumber.name}`)
           setTimeout(() => {
-            setSuccessMessage(null)
+            setNotification(null)
           }, 5000)
         })
       } else {
@@ -66,9 +69,10 @@ const App = () => {
       setPersons(persons.concat(nameObj))
       setNewName('')
       setNewNumber('')
-      setSuccessMessage(`Added ${nameObj.name}`)
+      setStatus('success')
+      setNotification(`Added ${nameObj.name}`)
       setTimeout(() => {
-        setSuccessMessage(null)
+        setNotification(null)
       }, 5000)
     }
       
@@ -91,6 +95,12 @@ const App = () => {
     if (confirm) {
       peopleService.remove(event.target).then(() => {
         setPeople()
+    }).catch(error => {
+      setStatus('error')
+      setNotification(`${event.target.name} has already been removed from the server`)
+      setTimeout(() => {
+        setNotification(null)
+      }, 5000)
     })
     } else {
         console.log('nope.');
@@ -100,7 +110,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <Notification message={successMessage} />
+      <Notification message={notification} status={status} />
       <Filter value={newSearch} onChange={handleSearchChange} />
       <h2>Add New Contact:</h2>
       <PersonForm 
