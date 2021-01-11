@@ -3,6 +3,7 @@ import Filter from './Filter'
 import People from './People'
 import PersonForm from './PersonForm'
 import peopleService from '../services/people'
+import Notification from './Notification'
 
 
 const App = () => {
@@ -11,6 +12,7 @@ const App = () => {
   const [ newName, setNewName ] = useState('')
   const [ newNumber, setNewNumber ] = useState('')
   const [ newSearch, setNewSearch ] = useState('')
+  const [successMessage, setSuccessMessage] = useState(null)
 
   const setPeople = () => peopleService.getAll()
   .then(initialPeople => {
@@ -50,6 +52,10 @@ const App = () => {
           setPersons(persons.map(person => person.id !== newNumber.id ? person : newNumber))
           setNewName('')
           setNewNumber('')
+          setSuccessMessage(`Updated ${newNumber.name}`)
+          setTimeout(() => {
+            setSuccessMessage(null)
+          }, 5000)
         })
       } else {
           console.log('nope.')
@@ -60,6 +66,10 @@ const App = () => {
       setPersons(persons.concat(nameObj))
       setNewName('')
       setNewNumber('')
+      setSuccessMessage(`Added ${nameObj.name}`)
+      setTimeout(() => {
+        setSuccessMessage(null)
+      }, 5000)
     }
       
     if (matchCheck.includes(true)) {
@@ -90,6 +100,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={successMessage} />
       <Filter value={newSearch} onChange={handleSearchChange} />
       <h2>Add New Contact:</h2>
       <PersonForm 
