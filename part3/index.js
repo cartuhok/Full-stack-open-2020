@@ -24,10 +24,12 @@ let people = [
   }
 ]
 
+//Homepage
 app.get('/', (request, response) => {
   response.send('<h1>Hello World!</h1>')
 })
 
+//Info Page
 app.get('/info', (request, response) => {
   response.send(`
   <p>Phonebook has info for ${people.length} people</p>
@@ -35,16 +37,27 @@ app.get('/info', (request, response) => {
   `)
 })
 
+//Specific Person
 app.get('/api/persons/:id', (request, response) => {
   const id = Number(request.params.id)
   const person = people.find(person => person.id === id)
   response.json(person)
 })
 
+//All People
 app.get('/api/persons', (request, response) => {
   response.json(people)
 })
 
+//Delete Someone (Resource)
+app.delete('/api/persons/:id', (request, response) => {
+  const id = Number(request.params.id)
+  people.filter(person => person.id !== id)
+
+  response.status(204).end()
+})
+
+//Listen for HTTP requests sent to port 3001 
 const PORT = 3001
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
