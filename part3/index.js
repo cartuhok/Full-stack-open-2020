@@ -67,7 +67,7 @@ app.get('/api/persons', (request, response) => {
 //Delete Someone (Resource)
 app.delete('/api/persons/:id', (request, response) => {
   const id = Number(request.params.id)
-  people.filter(person => person.id !== id)
+  people = people.filter(person => person.id !== id)
 
   response.status(204).end()
 })
