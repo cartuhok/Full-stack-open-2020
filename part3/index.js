@@ -105,7 +105,7 @@ app.post('/api/persons', (request, response) => {
 
   people = people.concat(person)
 
-  response.json(body)
+  response.json(person)
 })
 
 //Listen for HTTP requests sent to port 3001 
