@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+app.use(express.json())
 
 let people = [
   {
@@ -55,6 +56,42 @@ app.delete('/api/persons/:id', (request, response) => {
   people.filter(person => person.id !== id)
 
   response.status(204).end()
+})
+
+//Random ID Helper Function
+const generateID = () => {
+  return Math.floor(Math.random() * Math.floor(1000))
+}
+
+//Adding Someone (POST)
+app.post('/api/persons', (request, response) => {
+  const body = request.body
+
+  const nameMatch = people.filter(person => person.name === body.name)
+
+  if (!body.name) {
+    return response.status(400).json({
+      error: 'Must include a name'
+    })
+  } else if (!body.number) {
+    return response.status(400).json({
+      error: 'Must include a phone number'
+    })
+  } else if (nameMatch.length > 0) {
+    return response.status(400).json({
+      error: 'Name must be unique'
+    })
+  }
+
+  const person = {
+    id: generateID(),
+    name: body.name,
+    number: body.number
+  }
+
+  people = people.concat(person)
+
+  response.json(body)
 })
 
 //Listen for HTTP requests sent to port 3001 
