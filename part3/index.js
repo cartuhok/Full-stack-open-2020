@@ -1,4 +1,5 @@
 const express = require('express')
+const morgan = require('morgan')
 const app = express()
 app.use(express.json())
 
@@ -24,6 +25,8 @@ let people = [
       number: "420-773-189-458"
   }
 ]
+
+app.use(morgan('tiny'))
 
 //Homepage
 app.get('/', (request, response) => {
