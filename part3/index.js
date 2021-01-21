@@ -12,7 +12,7 @@ let people = [
   {
       id: 2, 
       name: "Alexandra Plante",
-      number: "207-330-0555"
+      number: "237-330-021155"
   },
   {
       id: 3,
@@ -22,7 +22,7 @@ let people = [
   {
       id: 4,
       name: "Tyler Rink",
-      number: "420-773-189-458"
+      number: "4202-7723-189-4528"
   }
 ]
 
