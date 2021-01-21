@@ -26,7 +26,18 @@ let people = [
   }
 ]
 
-app.use(morgan('tiny'))
+morgan.token('body', (req, res) => { return JSON.stringify(req.body) })
+
+app.use(morgan((tokens, req, res) => {
+  return [
+    tokens.method(req, res),
+    tokens.url(req, res),
+    tokens.status(req, res),
+    tokens.res(req, res, 'content-length'), '-',
+    tokens['response-time'](req, res), 'ms',
+    tokens.body(req, res),
+  ].join(' ')
+}))
 
 //Homepage
 app.get('/', (request, response) => {
